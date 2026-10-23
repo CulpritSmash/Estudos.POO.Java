@@ -1,0 +1,6 @@
+1. Porque ela não representa um tipo de produto, mas sim uma propriedade que um produto pode ter, independente do tipo
+e inclusive outras classes podem implementar ela se necessário, não só produto, por isso foi implementada como interface
+
+2. Classes abstratas obrigam as classes a ter uma relação de herança com ela, enquanto interfaces permitem que qualquer classe
+implemente seus métodos sem qualquer relação de herança. Além disso, classes abstratas podem ter atributos com modificadores
+enquanto interfaces só podem ter constantes
