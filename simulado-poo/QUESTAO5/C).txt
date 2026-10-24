@@ -1,0 +1,5 @@
+Porque EstoqueInsuficienteException herda de Exception, que exige verificação com throws: o método que puder gerar essa exceção deve ter a palavra throws com o nome
+da exceção em frente à assinatura.
+
+Já PagamentoRecusadoException herda de RuntimeException, que não exige verificação com throws, isso porque RuntimeException é destinada a exceções em tempo de execução
+e contém exceções padrão do Java que aparecem com tanta frequência que é benéfico não ter que verificar sempre.

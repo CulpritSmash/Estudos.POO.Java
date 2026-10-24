@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 import QUESTAO2.*;
 import QUESTAO3.*;
+import QUESTAO5.EstoqueInsuficienteException;
 
 public class CarrinhoDeCompras {
     List<Produto> itens = new ArrayList<>();
@@ -10,8 +11,12 @@ public class CarrinhoDeCompras {
     public void adicionar(Produto p){
         itens.add(p);
     }
-
-    public void adicionar(Produto p, int quantidade){
+    
+    public void adicionar(Produto p, int quantidade) throws EstoqueInsuficienteException{
+        if(quantidade > p.getEstoque()){
+            throw new EstoqueInsuficienteException(p.getNome(), p.getEstoque());
+        }
+        
         for(int i = 1; i <= quantidade; i++){
             itens.add(p);
         }

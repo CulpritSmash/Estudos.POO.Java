@@ -6,6 +6,9 @@ public abstract class Produto {
     private int estoque;
 
     public Produto(String codigo,  String nome, double precoBase, int estoque){
+        if(precoBase < 0){
+            throw new IllegalArgumentException("O preço não pode ser negativo");
+        }
         this.codigo = codigo;
         this.nome = nome;
         this.precoBase = precoBase;
@@ -18,6 +21,10 @@ public abstract class Produto {
 
     public String getNome(){
         return nome;
+    }
+
+    public int getEstoque(){
+        return estoque;
     }
 
     public abstract double calcularPrecoFinal();

@@ -1,0 +1,5 @@
+A saída é: 
+
+B: Estoque insuficiente para teclado. Disponível: 3
+C
+D
