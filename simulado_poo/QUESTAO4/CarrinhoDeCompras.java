@@ -6,7 +6,11 @@ import QUESTAO3.*;
 import QUESTAO5.EstoqueInsuficienteException;
 
 public class CarrinhoDeCompras {
-    List<Produto> itens = new ArrayList<>();
+    private List<Produto> itens = new ArrayList<>();
+
+    public List<Produto> getItens(){
+        return itens;
+    }
 
     public void adicionar(Produto p){
         itens.add(p);

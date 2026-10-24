@@ -1,0 +1,8 @@
+Cliente c = new ClienteVip("Ana", "111", "ana@gmail.com", "Rua A", 0.10);
+ClienteVip v = new Cliente("Ana", "111", "ana@gmail.com", "Rua A");
+
+Nesse trecho de código, a primeira linha compila, pois a variável c do tipo Cliente está guardando um objeto do tipo ClienteVip, o que faz sentido
+pois um ClienteVip é um tipo de Cliente;
+
+Já a segunda linha possui uma variável v do tipo ClienteVip que está guardando um objeto do tipo Cliente, e isso gera erro, pois ClienteVip é um tipo
+específico de cliente, ou seja, um Cliente não é um tipo de ClienteVip, mesmo que um ClienteVip seja um tipo de Cliente. Então não compila.

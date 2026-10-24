@@ -1,0 +1,8 @@
+1. new Produto(...) não compila porque Produto é uma classe abstrata, e essa propriedade bloqueia qualquer tentativa de instanciá-la.
+Isso é vantajoso para servir como modelo para subclasses de forma clara e segura
+e também permite a criação de métodos abstratos que cada classe implementa do seu jeito.
+
+2. Funciona porque como Produto é uma classe abstrata, ela exige que a classe que herdar dela implemente esse método, 
+e como não podemos instanciar Produto diretamente, o método exibirResumo() já vai ter sido corretamente implementado antes mesmo que uma classe que 
+possa o chamar seja instanciada, por isso funciona.
+
