@@ -1,0 +1,5 @@
+A linha p1.calcularFrete("60000-000"); não compila, pois p1 apesar de guardar um objeto do tipo ProdutoFisico, ela não tem acesso a seus métodos internos,
+por isso para que isso compilasse seria necessário realizar um downcasting criando uma nova variável do tipo ProdutoFisico e atribuindo a ela o conteúdo de p1:
+
+ProdutoFisico q1 = (ProdutoFisico) p1;
+q1.calcularFrete("60000-000");

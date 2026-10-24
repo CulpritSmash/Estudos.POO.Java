@@ -16,6 +16,10 @@ public abstract class Produto {
         return precoBase;
     }
 
+    public String getNome(){
+        return nome;
+    }
+
     public abstract double calcularPrecoFinal();
 
     public String exibirResumo(){

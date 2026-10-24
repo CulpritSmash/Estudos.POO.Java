@@ -1,0 +1,9 @@
+O código vai imprimir o seguinte:
+
+Teclado: 110.0
+E-book Java: 47.5
+Streaming: 18.0
+
+Foram 3 variáveis do tipo Produto, porém Java não olha apenas para o tipo das variáveis, ele checa o objeto que elas guardam
+e nesse caso a primeira guardava um ProdutoFisico, a segunda guardava um ProdutoDigital e a terceira guardava uma Assinatura
+, e o Java escolhe o método dependendo do tipo real do objeto se comportando de forma diferente pra cada um graças ao polimorfismo.
