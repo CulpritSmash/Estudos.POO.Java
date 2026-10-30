@@ -1,5 +1,6 @@
 package Menus;
 import java.util.Scanner;
+import Animais.Animal;
 import Menus.*;
 
 public class MenuPrincipal {
@@ -24,7 +25,7 @@ public class MenuPrincipal {
                 MenuCadastro.exibirMenuCadastro(sc);
                 break;
             case 3:
-                
+                MenuAdocao.exibirMenuAdocao(sc, Animal.getAnimais());
                 break;
             case 4:
 
