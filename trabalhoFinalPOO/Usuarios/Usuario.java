@@ -18,10 +18,4 @@ public abstract class Usuario {
     public String getSenha(){
         return senha;
     }
-
-    private static List<Usuario> usuarios = new ArrayList();
-
-    public List<Usuario> getUsuarios(){
-        return usuarios;
-    }
 }

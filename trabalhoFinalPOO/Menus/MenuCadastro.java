@@ -1,6 +1,7 @@
 package Menus;
 import java.util.Scanner;
 import Cadastros.Cadastro;
+import Exceções.CadastroInvalidoException;
 import Usuarios.*;
 
 public class MenuCadastro {
@@ -29,11 +30,19 @@ public class MenuCadastro {
 
         if(opcao == 1){
             Usuario novoUsuarioCadastrado = new Voluntario(email, senha);
-            cadastro.cadastrar(novoUsuarioCadastrado);
+            try{
+                cadastro.cadastrar(novoUsuarioCadastrado);
+            } catch (CadastroInvalidoException e){
+                System.out.println(e.getMessage());
+            }
         }
         else if(opcao == 2){
             Usuario novoUsuarioCadastrado = new Veterinario(email, senha);
-            cadastro.cadastrar(novoUsuarioCadastrado);
+            try{
+                cadastro.cadastrar(novoUsuarioCadastrado);
+            } catch (CadastroInvalidoException e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

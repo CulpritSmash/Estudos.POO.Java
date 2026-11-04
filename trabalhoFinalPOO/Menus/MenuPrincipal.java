@@ -20,38 +20,45 @@ public class MenuPrincipal {
     }
 
     public static void exibirMenuPrincipal(Scanner sc){
+        int opcao;
+        
+        do{
+            System.out.println("=".repeat(45));
+            System.out.println("     MENU PRINCIPAL     ");
+            System.out.println("=".repeat(45) + "\n");
 
-        System.out.println("=".repeat(45));
-        System.out.println("     MENU PRINCIPAL     ");
-        System.out.println("=".repeat(45) + "\n");
+            System.out.println("(1) - Fazer login");
+            System.out.println("(2) - Realizar cadastro");
+            System.out.println("(3) - Visualizar animais disponíveis");
+            System.out.println("(4) - Sobre o Sistema");
+            System.out.println("(0) - Encerrar Programa" + "\n");
+            System.out.print("Digite a sua opção: ");
 
-        System.out.println("(1) - Fazer login");
-        System.out.println("(2) - Realizar cadastro");
-        System.out.println("(3) - Visualizar animais disponíveis");
-        System.out.println("(4) - Sobre o Sistema");
-        System.out.println("(0) - Encerrar Programa" + "\n");
-        System.out.print("Digite a sua opção: ");
+            opcao = Integer.parseInt(sc.nextLine());
 
-        int opcao = Integer.parseInt(sc.nextLine());
+            switch (opcao){
+                case 1: 
+                    MenuLogin.exibirMenuLogin(sc);
+                    break;
+                case 2: 
+                    MenuCadastro.exibirMenuCadastro(sc);
+                    break;
+                case 3:
+                    MenuAdocao.exibirMenuAdocao(sc, Animal.getAnimais());
+                    break;
+                case 4:
+                    exibirSobre();
+                    break;
 
-        switch (opcao){
-            case 1: 
-                MenuLogin.exibirMenuLogin(sc);
-                break;
-            case 2: 
-                MenuCadastro.exibirMenuCadastro(sc);
-                break;
-            case 3:
-                MenuAdocao.exibirMenuAdocao(sc, Animal.getAnimais());
-                break;
-            case 4:
-                exibirSobre();
-                break;
-            case 5:
-
-            default:
-                System.out.println("Encerrando programa...");
-                System.exit(0);
-        }
+                default:
+                    while(opcao != 0){
+                        System.out.println("Erro. Digite uma opção entre 0 e 4: ");
+                        opcao = Integer.parseInt(sc.nextLine());
+                    }
+                    System.out.println("Encerrando programa...");
+                    System.exit(0);
+            }
+        } while(opcao != 0);
     }
+        
 }
