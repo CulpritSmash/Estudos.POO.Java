@@ -1,4 +1,6 @@
 package Usuarios;
+import java.util.List;
+import java.util.ArrayList;
 
 public abstract class Usuario {
     private final String email;
@@ -15,5 +17,11 @@ public abstract class Usuario {
 
     public String getSenha(){
         return senha;
+    }
+
+    private static List<Usuario> usuarios = new ArrayList();
+
+    public List<Usuario> getUsuarios(){
+        return usuarios;
     }
 }

@@ -27,7 +27,6 @@ public class Animal {
 
         
         animais.add(this);
-        
     }
 
     public static List<Animal> getAnimais(){
