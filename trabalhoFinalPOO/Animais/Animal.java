@@ -1,4 +1,5 @@
 package Animais;
+import ControleSaude.InformacoesMedicas;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -11,11 +12,13 @@ public class Animal {
     private String estadoSaude;
     private String dataResgate;
     private String statusAdocao;
-    private int id;
+    private String sexo;
+    private double peso;
+    private InformacoesMedicas dadosMedicos;
 
     private static List<Animal> animais = new ArrayList<>();
 
-    public Animal(String nome, String especie, String raca, int idade, String porte, String estadoSaude, String dataResgate, String statusAdocao){
+    public Animal(String nome, String especie, String raca, int idade, String porte, String estadoSaude, String dataResgate, String statusAdocao, String sexo, double peso){
         this.nome = nome;
         this.especie = especie;
         this.raca = raca;
@@ -24,8 +27,9 @@ public class Animal {
         this.estadoSaude = estadoSaude;
         this.dataResgate = dataResgate;
         this.statusAdocao = statusAdocao;
+        this.sexo = sexo;
+        this.peso = peso;
 
-        
         animais.add(this);
     }
 
@@ -49,4 +53,15 @@ public class Animal {
         return especie;
     }
 
+    public String getSexo(){
+        return sexo;
+    }
+
+    public String getRaca(){
+        return raca;
+    }
+
+    public double getPeso(){
+        return peso;
+    }
 }

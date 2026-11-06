@@ -1,5 +1,4 @@
 package Menus;
-import java.util.Scanner;
 import Animais.Animal;
 import Menus.*;
 
@@ -19,7 +18,7 @@ public class MenuPrincipal {
 
     }
 
-    public static void exibirMenuPrincipal(Scanner sc){
+    public static void exibirMenuPrincipal(){
         int opcao;
         
         do{
@@ -34,30 +33,7 @@ public class MenuPrincipal {
             System.out.println("(0) - Encerrar Programa" + "\n");
             System.out.print("Digite a sua opção: ");
 
-            opcao = Integer.parseInt(sc.nextLine());
-
-            switch (opcao){
-                case 1: 
-                    MenuLogin.exibirMenuLogin(sc);
-                    break;
-                case 2: 
-                    MenuCadastro.exibirMenuCadastro(sc);
-                    break;
-                case 3:
-                    MenuAdocao.exibirMenuAdocao(sc, Animal.getAnimais());
-                    break;
-                case 4:
-                    exibirSobre();
-                    break;
-
-                default:
-                    while(opcao != 0){
-                        System.out.println("Erro. Digite uma opção entre 0 e 4: ");
-                        opcao = Integer.parseInt(sc.nextLine());
-                    }
-                    System.out.println("Encerrando programa...");
-                    System.exit(0);
-            }
+            
         } while(opcao != 0);
     }
         
