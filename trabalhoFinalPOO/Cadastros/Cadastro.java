@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Cadastro {
     private static final List<Usuario> usuariosCadastrados = new ArrayList<>();
 
-    public List<Usuario> getUsuarios(){
+    public static List<Usuario> getUsuarios(){
         return usuariosCadastrados;
     }
 

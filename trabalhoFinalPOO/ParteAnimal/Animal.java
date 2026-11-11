@@ -1,7 +1,9 @@
-package Animais;
-import ControleSaude.InformacoesMedicas;
+package ParteAnimal;
+import Exceções.*;
+import Usuarios.Veterinario;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Animal {
     private String nome;
@@ -11,10 +13,10 @@ public class Animal {
     private String porte;
     private String estadoSaude;
     private String dataResgate;
-    private String statusAdocao;
+    private String statusAdocao; //DISPONIVEL ou INDISPONIVEL
     private String sexo;
     private double peso;
-    private InformacoesMedicas dadosMedicos;
+    private Veterinario vetResponsavel;
 
     private static List<Animal> animais = new ArrayList<>();
 
@@ -31,6 +33,14 @@ public class Animal {
         this.peso = peso;
 
         animais.add(this);
+    }
+
+    public static void exibirAnimais(){
+        int numero = 1;
+        for(Animal a : Animal.getAnimais()){
+            System.out.println(String.format("%02d", numero) + "  " + a.getNome() + " ".repeat(14) + a.getEspecie() + "  " + a.getIdade() + "  " + a.getStatusAdocao());
+            numero++;
+        }
     }
 
     public static List<Animal> getAnimais(){
@@ -63,5 +73,9 @@ public class Animal {
 
     public double getPeso(){
         return peso;
+    }
+
+    public Veterinario getVetResponsavel(){
+        return vetResponsavel;
     }
 }

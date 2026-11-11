@@ -1,7 +1,7 @@
 package ControleSaude;
 import java.util.List;
 import java.util.ArrayList;
-import Animais.Animal;
+import ParteAnimal.*;
 import Usuarios.Veterinario;
 
 public class Consulta {
@@ -39,7 +39,7 @@ public class Consulta {
 
         System.out.println("Motivo da consulta: " + motivo);
         System.out.println("Anamnese: " + anamnese);
-        System.out.println("Exame físico: " + animal.dadosMedicos);
+        System.out.println("Exame físico: " + );
         System.out.println("Conduta e prescrição: " + prescricao);
         System.out.println("Exames solicitados: " + );
         System.out.println("Orientações ao tutor: ");

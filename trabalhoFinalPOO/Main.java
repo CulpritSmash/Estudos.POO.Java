@@ -1,18 +1,22 @@
 import Menus.*;
-import javax.swing.JOptionPane;
-
-import Animais.Animal;
+import ParteAnimal.Animal;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int opcao;
+        int opcao = -1;
 
         do{
             MenuPrincipal.exibirMenuPrincipal();
-            opcao = sc.nextInt();
+            
+            try{
+                opcao = Integer.parseInt(sc.nextLine());
+            } catch(NumberFormatException e){
+                System.out.println("Erro. Digite um número entre 0 e 4.");
+                continue;
+            }
 
             switch (opcao){
                 case 1: 
@@ -27,14 +31,11 @@ public class Main {
                 case 4:
                     MenuPrincipal.exibirSobre();
                     break;
-
-                default:
-                    while(opcao != 0){
-                        System.out.println("Erro. Digite uma opção entre 0 e 4: ");
-                        opcao = Integer.parseInt(sc.nextLine());
-                    }
+                case 0:
                     System.out.println("Encerrando programa...");
-                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Opção inválida. Digite uma opção entre 0 e 4.");
             }
         } while (opcao != 0);
         

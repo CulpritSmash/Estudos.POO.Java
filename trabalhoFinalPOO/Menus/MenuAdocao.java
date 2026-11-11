@@ -1,20 +1,18 @@
 package Menus;
 
-import Animais.Animal;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MenuAdocao{
+import ParteAnimal.Animal;
 
+public class MenuAdocao{
     public static void exibirAnimaisDisponiveisAdocao(List<Animal> animais){
-        int numero = 0;
-        for(Animal animal : animais){
-            if(animal.getStatusAdocao().toLowerCase().equals("disponivel")){
-                System.out.println(String.format("%02d", numero) + "  " + animal.getNome() + " ".repeat(14) + animal.getEspecie() + "  " + animal.getIdade() + "  " + animal.getStatusAdocao());
-            }
+        int numero = 1;
+        for(Animal a : Animal.getAnimais()){
+            System.out.println(String.format("%02d", numero) + "  " + a.getNome() + " ".repeat(14) + a.getEspecie() + "  " + a.getIdade() + "  " + a.getStatusAdocao());
         }
-        System.out.println("-".repeat(45));
+        numero++;
     }
 
     public static void exibirMenuAdocao(Scanner sc, List<Animal> animais){
