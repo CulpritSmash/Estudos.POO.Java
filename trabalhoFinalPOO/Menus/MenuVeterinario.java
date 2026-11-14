@@ -22,7 +22,7 @@ public class MenuVeterinario{
         System.out.println("(0) - Sair" + "\n");
     }
 
-    public Animal selecionarAnimal(Scanner sc){
+    public static Animal selecionarAnimal(Scanner sc){
         int opcao = INDEFINIDA;
     
         do{
@@ -46,7 +46,7 @@ public class MenuVeterinario{
         return Animal.getAnimais().get(opcao - 1); 
     }
 
-    public static void lerOpcao(Scanner sc){
+    public static int lerOpcao(Scanner sc){
         int opcao = INDEFINIDA;
 
         do{
@@ -55,31 +55,12 @@ public class MenuVeterinario{
             try{
                 opcao = Integer.parseInt(sc.nextLine());
             } catch(NumberFormatException e){
-                System.out.println("Erro. Digite um número entre 0 e 6");
-                return;
+                System.out.println("Erro. Digite uma opção válida");
             }
 
-            switch(opcao){
-                case 1:
-                    Animal.exibirAnimais();
-                    try{
-                        Consulta consulta = new Consulta();
-                    }
-                case 2:
-
-                case 3:
-
-                case 4:
-
-                case 5:
-
-                case 6:
-
-                case 0:
-
-                default:
-
-            }
-        } while(opcao != 0);
+            if(opcao < 0 || opcao > 6) System.out.println("Opção inválida. Digite uma opção entre 0 e 6");
+        } while(opcao < 0 || opcao > 6);
+        
+        return opcao;
     }
 }

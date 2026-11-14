@@ -1,6 +1,8 @@
 package Menus;
 import Cadastros.SessaoLogin;
 import Usuarios.*;
+import ParteAnimal.*;
+import ControleSaude.*;
 
 import java.util.Scanner;
 
@@ -21,12 +23,36 @@ public class MenuLogin{
         SessaoLogin login = new SessaoLogin();
         Usuario usuario = login.realizarLogin(email, senha);
 
+        if(usuario == null){
+            throw new LoginInvalidoException("Email ou senha inválidos!");
+        }
+
         if(usuario instanceof Voluntario){
             System.out.println("Ainda em construção...");
             return;
         } else if(usuario instanceof Veterinario){
+            Veterinario vet = (Veterinario) usuario;
             MenuVeterinario.exibir();
-            MenuVeterinario.lerOpcao(sc);
-        }
+            int opcao = MenuVeterinario.lerOpcao(sc);
+
+            do{
+                switch(opcao){
+                    case 1:
+                
+                    case 2:
+
+                    case 3:
+
+                    case 4:
+
+                    case 5: 
+
+                    case 6:
+
+                    case 0:
+
+                }
+            } while(opcao != 0);
+        } 
     }
 }

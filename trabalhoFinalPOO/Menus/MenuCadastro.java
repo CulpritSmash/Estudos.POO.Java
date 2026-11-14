@@ -40,14 +40,16 @@ public class MenuCadastro{
         String email = sc.nextLine();
         System.out.print("Senha: ");
         String senha = sc.nextLine();
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
 
         Cadastro cadastro = new Cadastro();
 
         Usuario novoUsuario;
         if(opcao == 1){
-            novoUsuario = new Voluntario(email, senha);
+            novoUsuario = new Voluntario(email, senha, nome);
         } else{
-            novoUsuario = new Veterinario(email, senha);
+            novoUsuario = new Veterinario(email, senha, nome);
         }
 
         try{
