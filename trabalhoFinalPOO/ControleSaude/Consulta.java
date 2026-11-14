@@ -60,4 +60,24 @@ public class Consulta {
     public void adicionarTratamento(Tratamento tratamento){
         this.tratamentos.add(tratamento);
     }
+
+    public String getMotivo(){
+        return motivo;
+    }
+
+    public String getAvaliacaoClinica(){
+        return avaliacaoClinica;
+    }
+
+    public String getDiagnostico(){
+        return diagnostico;
+    }
+
+    public String getExamesSolicitados(){
+        return examesSolicitados;
+    }
+
+    public String getObservacoes(){
+        return observacoes;
+    }
 }

@@ -17,6 +17,8 @@ public class Animal {
     private String sexo;
     private double peso;
     private Veterinario vetResponsavel;
+    private static int animaisTotais = 0;
+    private int id;
 
     private static List<Animal> animais = new ArrayList<>();
 
@@ -31,6 +33,7 @@ public class Animal {
         this.statusAdocao = statusAdocao;
         this.sexo = sexo;
         this.peso = peso;
+        this.id = ++animaisTotais;
 
         animais.add(this);
     }
@@ -77,5 +80,10 @@ public class Animal {
 
     public Veterinario getVetResponsavel(){
         return vetResponsavel;
+    }
+
+    @Override
+    public String toString(){
+        return id + " - " + nome + " (" + especie + ")";
     }
 }

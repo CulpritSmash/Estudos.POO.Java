@@ -38,7 +38,7 @@ public class MenuLogin{
             do{
                 switch(opcao){
                     case 1:
-                
+                        vet.selecionarAnimal(); // Esse método abre o GUI pra selecionar o animal da consulta e de lá ele abre 
                     case 2:
 
                     case 3:

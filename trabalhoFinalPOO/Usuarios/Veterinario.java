@@ -11,8 +11,10 @@ public class Veterinario extends Usuario{
     public Veterinario(String login, String senha, String nome){
         super(login, senha, nome);
     }
-
-    public void acessarInformacoesMedicas(Animal animal, String novasInformacoes){   // Esse método permite que o próprio veterinário salve e altere as informações médicas dos animais
-        InformacoesMedicas.abrirEditor();                                                         // Essas informações não existem como variável, mas são definidas em texto por meio desse método pelo veterinário
-    }                                                                                // Assim, apenas um veterinário pode ver e alterá-las
+    
+    // GUI para selecionar o animal da consulta
+    // De lá ele abre a GUI de consulta baseado no animal que foi selecionado
+    public void selecionarAnimal(){
+        new TelaSelecaoAnimal(this, Animal.getAnimais());
+    }
 }

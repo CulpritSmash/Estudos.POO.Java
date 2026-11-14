@@ -22,30 +22,6 @@ public class MenuVeterinario{
         System.out.println("(0) - Sair" + "\n");
     }
 
-    public static Animal selecionarAnimal(Scanner sc){
-        int opcao = INDEFINIDA;
-    
-        do{
-            System.out.print("Digite o ID do animal que você quer consultar: ");
-
-            try{
-                opcao = Integer.parseInt(sc.nextLine());
-            } catch(NumberFormatException e){
-            System.out.println("Erro. Digite uma opção válida.");
-            }
-        } while(opcao == INDEFINIDA);
-        
-
-        /* O ID dos animais é gerado por ordem de criação, o primeiro animal recebe ID 1, o segundo ID 2, e assim em diante 
-           Por isso verifico se a opção é válida checando se ela está dentro do número de animais que existem */
-        if(opcao > Animal.getAnimais().size() || opcao < Animal.getAnimais().size()){
-            System.out.println("ID de Animal não encontrado");
-            throw new IllegalArgumentException("Esse ID de animal não existe.");
-        } 
-
-        return Animal.getAnimais().get(opcao - 1); 
-    }
-
     public static int lerOpcao(Scanner sc){
         int opcao = INDEFINIDA;
 
