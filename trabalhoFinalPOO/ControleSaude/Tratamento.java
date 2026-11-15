@@ -24,8 +24,36 @@ public class Tratamento {
         System.out.println("- " + medicamento + " | Dose: " + dosagem + " (" + viaAdministracao + ") | Duração: " + diasDuracao + "dias | Status");
     }
 
+    public void atualizar(String medicamento, String dosagem, String via, int dias, boolean concluido){
+        this.medicamento = medicamento;
+        this.dosagem = dosagem;
+        this.viaAdministracao = via;
+        this.diasDuracao = dias;
+        this.concluido = concluido;
+    }
+
+    public String getMedicamento(){
+        return medicamento;
+    }
+
+    public String getDosagem(){
+        return dosagem;
+    }
+
+    public String viaAdministracao(){
+        return viaAdministracao;
+    }
+    
+    public int getDiasDuracao(){
+        return diasDuracao;
+    }
+
+    public boolean getStatus(){
+        return concluido;
+    }
+
     @Override 
     public String toString(){
-        return medicamento + " - " + dosagem + " (" + diasDuracao + ") dias.";
+        return medicamento + " - " + dosagem + " (" + diasDuracao + " dias) - " + (concluido ? "Concluído" : "Em andamento");
     }
 }
