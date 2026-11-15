@@ -14,11 +14,10 @@ public class MenuVeterinario{
         System.out.println("=".repeat(45) + "\n");
 
         System.out.println("(1) - Consultar Animais");
-        System.out.println("(2) - Registrar Atendimento");
-        System.out.println("(3) - Atualizar Tratamento");
-        System.out.println("(4) - Registrar Vacinação");
-        System.out.println("(5) - Emitir Relatório Médico");
-        System.out.println("(6) - Notificações");
+        System.out.println("(2) - Atualizar Tratamento");
+        System.out.println("(3) - Registrar Vacinação");
+        System.out.println("(4) - Emitir Relatório Médico");
+        System.out.println("(5) - Notificações");
         System.out.println("(0) - Sair" + "\n");
     }
 

@@ -18,9 +18,10 @@ public class Consulta {
     private String observacoes;
     private List<Tratamento> tratamentos;
 
-    public Consulta(String data, String horario, Animal animal, Veterinario profissionalResponsavel, String avaliacaoClinica, String diagnostico, String examesSolicitados, String observacoes){
+    public Consulta(String data, String horario, String motivo, Animal animal, Veterinario profissionalResponsavel, String avaliacaoClinica, String diagnostico, String examesSolicitados, String observacoes){
         this.data = data;
         this.horario = horario;
+        this.motivo = motivo;
         this.animal = animal;
         this.profissionalResponsavel = profissionalResponsavel;
         this.avaliacaoClinica = avaliacaoClinica;
@@ -61,6 +62,14 @@ public class Consulta {
         this.tratamentos.add(tratamento);
     }
 
+    public String getData(){
+        return data;
+    }
+
+    public String getHorario(){
+        return horario;
+    }
+
     public String getMotivo(){
         return motivo;
     }
@@ -79,5 +88,24 @@ public class Consulta {
 
     public String getObservacoes(){
         return observacoes;
+    }
+
+    public Animal getAnimal(){
+        return animal;
+    }
+
+    @Override 
+    public String toString(){
+        return data + " às " + horario + " - " + motivo;
+    }
+
+    public static List<Consulta> getConsultasDoAnimal(Animal animal){
+        List<Consulta> resultado = new ArrayList<>();
+        for(Consulta c : registroConsultas){
+            if(c.animal == animal){
+                resultado.add(c);
+            }
+        }
+        return resultado;
     }
 }

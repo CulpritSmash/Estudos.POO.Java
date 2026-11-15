@@ -25,19 +25,12 @@ public class TelaConsulta extends JFrame {
         linha.add(campo, BorderLayout.CENTER);
         return linha;
     }
-    
-    public TelaConsulta(Veterinario vet, Animal animal) {
-        setTitle("Registrar Consulta");
-        setSize(540, 440);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
 
+    private JPanel montarFormulario(){
         JPanel painelCampos = new JPanel();
         painelCampos.setLayout(new BoxLayout(painelCampos, BoxLayout.Y_AXIS));
-        painelCampos.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        painelCampos.setBorder(BorderFactory.createEmptyBorder(15, 15, 15,15));
 
-        // Inicialização dos atributos dos campos
         txtData = new JTextField();
         txtHorario = new JTextField();
         txtMotivo = new JTextField(); 
@@ -50,7 +43,6 @@ public class TelaConsulta extends JFrame {
         txtObservacoes.setLineWrap(true);
         txtObservacoes.setWrapStyleWord(true);
 
-        // Adição dos rótulos e campos na GUI
         painelCampos.add(criarLinha("Data:", txtData));
         painelCampos.add(Box.createVerticalStrut(8));
         painelCampos.add(criarLinha("Horário:", txtHorario));
@@ -64,8 +56,20 @@ public class TelaConsulta extends JFrame {
         painelCampos.add(criarLinha("Exames solicitados:", txtExamesSolicitados));
         painelCampos.add(Box.createVerticalStrut(8));
         painelCampos.add(criarLinha("Observações/Retorno:", new JScrollPane(txtObservacoes)));
+
+        return painelCampos;
+    }
+    
+    public TelaConsulta(Veterinario vet, Animal animal) {
+        setTitle("Registrar Consulta");
+        setSize(540, 440);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
         
-        // Adição do botão de salvar e sua ação
+        // Adição dos botões e suas ações
+        JPanel painelBotoes = new JPanel(new GridLayout(1, 2, 8, 8));
+
         JButton btnSalvar = new JButton("Salvar Consulta");
         btnSalvar.addActionListener(e -> {
             String data = txtData.getText();
@@ -75,11 +79,55 @@ public class TelaConsulta extends JFrame {
             String diagnostico = txtDiagnostico.getText();
             String exames = txtExamesSolicitados.getText();
             String observacoes = txtObservacoes.getText();
-            Consulta consulta = new Consulta(data, horario, animal, vet, avaliacao, diagnostico, exames, observacoes);
+            Consulta consulta = new Consulta(data, horario, motivo, animal, vet, avaliacao, diagnostico, exames, observacoes);
+            new TelaSelecaoAnimal(vet, Animal.getAnimais()).setVisible(true);
             dispose();
         });
 
-        add(painelCampos, BorderLayout.NORTH);
-        add(btnSalvar, BorderLayout.SOUTH);
+        JButton btnVoltar = new JButton("Voltar");
+        btnVoltar.addActionListener(e ->{
+            new TelaSelecaoAnimal(vet, Animal.getAnimais()).setVisible(true);
+            dispose();
+        });
+
+        painelBotoes.add(btnSalvar);
+        painelBotoes.add(btnVoltar);
+
+        add(montarFormulario(), BorderLayout.NORTH);
+        add(painelBotoes, BorderLayout.SOUTH);
+    }
+
+    public TelaConsulta(Consulta consulta){
+        setTitle("Consulta de " + consulta.getData());
+        setSize(540, 440);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
+
+        add(montarFormulario(), BorderLayout.NORTH);
+
+        txtData.setText(consulta.getData());
+        txtHorario.setText(consulta.getHorario());
+        txtMotivo.setText(consulta.getMotivo());
+        txtAvaliacaoClinica.setText(consulta.getAvaliacaoClinica());
+        txtDiagnostico.setText(consulta.getDiagnostico());
+        txtExamesSolicitados.setText(consulta.getExamesSolicitados());
+        txtObservacoes.setText(consulta.getObservacoes());
+
+        txtData.setEditable(false);
+        txtHorario.setEditable(false);
+        txtMotivo.setEditable(false);
+        txtAvaliacaoClinica.setEditable(false);
+        txtDiagnostico.setEditable(false);
+        txtExamesSolicitados.setEditable(false);
+        txtObservacoes.setEditable(false);
+
+        JButton btnFechar = new JButton("Fechar");
+        btnFechar.addActionListener(e -> {
+            new TelaListaConsultas(Consulta.getConsultasDoAnimal(consulta.getAnimal()));
+            dispose();
+        });
+
+        add(btnFechar, BorderLayout.SOUTH);
     }
 }
