@@ -1,10 +1,12 @@
 package Guis;
-import ControleSaude.Consulta;
+import ControleSaude.*;
 import Usuarios.Veterinario;
 import ParteAnimal.Animal;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class TelaConsulta extends JFrame {
     // Atributos da tela
@@ -15,6 +17,8 @@ public class TelaConsulta extends JFrame {
     private JTextField txtDiagnostico;
     private JTextField txtExamesSolicitados;
     private JTextArea txtObservacoes;
+    private DefaultListModel<Tratamento> modeloTratamentos = new DefaultListModel<>();
+    private List<Tratamento> tratamentosTemporarios = new ArrayList<>();
 
     // Método auxiliar pra poupar tempo na adição de linhas na GUI
     private JPanel criarLinha(String textoRotulo, JComponent campo){
@@ -59,16 +63,55 @@ public class TelaConsulta extends JFrame {
 
         return painelCampos;
     }
+
+    private JPanel montarPainelTratamentos(){
+        JPanel painel = new JPanel(new BorderLayout(5, 5));
+        painel.setBorder(BorderFactory.createTitledBorder("Tratamentos Prescritos"));
+
+        JList<Tratamento> listaTratamentos = new JList<>(modeloTratamentos);
+        painel.add(new JScrollPane(listaTratamentos), BorderLayout.CENTER);
+
+        return painel;
+    }
+
+    private void abrirDialogoTratamento(){
+        JTextField txtMed = new JTextField();
+        JTextField txtDose = new JTextField();
+        JTextField txtVia = new JTextField();
+        JTextField txtDias = new JTextField();
+
+        Object[] campos = {
+            "Medicamento:", txtMed,
+            "Dosagem (ex: 1 comp 12/12h):", txtDose,
+            "Via (Oral, Injetável, Tópica):", txtVia,
+            "Duração (dias):", txtDias
+        };
+
+        int opcao = JOptionPane.showConfirmDialog(this, campos, "Novo Tratamento", JOptionPane.OK_CANCEL_OPTION);
+        if(opcao == JOptionPane.OK_OPTION){
+            try{
+                int dias = Integer.parseInt(txtDias.getText().trim());
+                Tratamento t = new Tratamento(txtMed.getText(), txtDose.getText(), txtVia.getText(), dias);
+                tratamentosTemporarios.add(t);
+                modeloTratamentos.addElement(t);
+            } catch(NumberFormatException er){
+                JOptionPane.showMessageDialog(this, "Digite um número válido para os dias.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+            
+    }
     
+    // Construtor no modo de escrita
     public TelaConsulta(Veterinario vet, Animal animal) {
         setTitle("Registrar Consulta");
-        setSize(540, 440);
+        setSize(600, 550);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         
         // Adição dos botões e suas ações
         JPanel painelBotoes = new JPanel(new GridLayout(1, 2, 8, 8));
+        JPanel painelTrat = montarPainelTratamentos();
 
         JButton btnSalvar = new JButton("Salvar Consulta");
         btnSalvar.addActionListener(e -> {
@@ -79,9 +122,17 @@ public class TelaConsulta extends JFrame {
             String diagnostico = txtDiagnostico.getText();
             String exames = txtExamesSolicitados.getText();
             String observacoes = txtObservacoes.getText();
-            Consulta consulta = new Consulta(data, horario, motivo, animal, vet, avaliacao, diagnostico, exames, observacoes);
+            Consulta novaConsulta = new Consulta(data, horario, motivo, animal, vet, avaliacao, diagnostico, exames, observacoes);
+            for(Tratamento t : tratamentosTemporarios){
+                novaConsulta.adicionarTratamento(t);
+            }
             new TelaSelecaoAnimal(vet, Animal.getAnimais()).setVisible(true);
             dispose();
+        });
+
+        JButton btnAddTratamento = new JButton("+ Adicionar tratamento");
+        btnAddTratamento.addActionListener(e -> {
+            abrirDialogoTratamento();
         });
 
         JButton btnVoltar = new JButton("Voltar");
@@ -90,21 +141,26 @@ public class TelaConsulta extends JFrame {
             dispose();
         });
 
+        painelTrat.add(btnAddTratamento, BorderLayout.SOUTH);
         painelBotoes.add(btnSalvar);
         painelBotoes.add(btnVoltar);
 
         add(montarFormulario(), BorderLayout.NORTH);
+        
         add(painelBotoes, BorderLayout.SOUTH);
+        add(painelTrat, BorderLayout.CENTER);
     }
 
+    // Construtor no modo de leitura
     public TelaConsulta(Consulta consulta){
         setTitle("Consulta de " + consulta.getData());
-        setSize(540, 440);
+        setSize(600, 550);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
         add(montarFormulario(), BorderLayout.NORTH);
+        add(montarPainelTratamentos(), BorderLayout.CENTER);
 
         txtData.setText(consulta.getData());
         txtHorario.setText(consulta.getHorario());
@@ -121,6 +177,10 @@ public class TelaConsulta extends JFrame {
         txtDiagnostico.setEditable(false);
         txtExamesSolicitados.setEditable(false);
         txtObservacoes.setEditable(false);
+
+        for(Tratamento t : consulta.getTratamentos()){
+            modeloTratamentos.addElement(t);
+        }
 
         JButton btnFechar = new JButton("Fechar");
         btnFechar.addActionListener(e -> {

@@ -23,4 +23,9 @@ public class Tratamento {
         String status = concluido ? "Concluído" : "Em andamento";
         System.out.println("- " + medicamento + " | Dose: " + dosagem + " (" + viaAdministracao + ") | Duração: " + diasDuracao + "dias | Status");
     }
+
+    @Override 
+    public String toString(){
+        return medicamento + " - " + dosagem + " (" + diasDuracao + ") dias.";
+    }
 }

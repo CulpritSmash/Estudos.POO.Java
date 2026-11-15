@@ -62,6 +62,10 @@ public class Consulta {
         this.tratamentos.add(tratamento);
     }
 
+    public List<Tratamento> getTratamentos(){
+        return tratamentos;
+    }
+
     public String getData(){
         return data;
     }
