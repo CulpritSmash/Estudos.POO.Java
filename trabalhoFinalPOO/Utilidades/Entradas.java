@@ -34,4 +34,21 @@ public class Entradas {
             }
         }
     }
+
+    public static int lerOpcao(Scanner sc, int min) {
+        while (true) {
+            System.out.print("Escolha uma opção: ");
+            String entrada = sc.nextLine().trim();
+
+            try {
+                int opcao = Integer.parseInt(entrada);
+                if (opcao >= min) {
+                    return opcao;
+                }
+                System.out.println("Opção inválida. Digite um número maior que" + min);
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Digite apenas números.");
+            }
+        }
+    }
 }

@@ -126,7 +126,7 @@ public class TelaConsulta extends JFrame {
             for(Tratamento t : tratamentosTemporarios){
                 novaConsulta.adicionarTratamento(t);
             }
-            new TelaSelecaoAnimal(vet, Animal.getAnimais()).setVisible(true);
+            new TelaVetSelecaoAnimal(vet, Animal.getAnimais()).setVisible(true);
             dispose();
         });
 
@@ -137,7 +137,7 @@ public class TelaConsulta extends JFrame {
 
         JButton btnVoltar = new JButton("Voltar");
         btnVoltar.addActionListener(e ->{
-            new TelaSelecaoAnimal(vet, Animal.getAnimais()).setVisible(true);
+            new TelaVetSelecaoAnimal(vet, Animal.getAnimais()).setVisible(true);
             dispose();
         });
 

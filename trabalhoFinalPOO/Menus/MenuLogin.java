@@ -32,24 +32,7 @@ public class MenuLogin{
             return;
         } else if(usuario instanceof Veterinario){
             Veterinario vet = (Veterinario) usuario;
-            MenuVeterinario.exibir();
-            int opcao = MenuVeterinario.lerOpcao(sc);
-
-            do{
-                switch(opcao){
-                    case 1:
-                        vet.selecionarAnimal(); // Esse método abre o GUI pra selecionar o animal e lá tem mais opções do que fazer com o animal selecionado 
-                    case 2:
-                        vet.selecionarAnimal(); // Mesmo caso, mas aqui é esperado atualizar algum tratamento
-                    case 3:
-                        
-                    case 4:
-
-
-                    case 0:
-
-                }
-            } while(opcao != 0);
-        } 
+            vet.selecionarAnimal();
+        }
     }
 }

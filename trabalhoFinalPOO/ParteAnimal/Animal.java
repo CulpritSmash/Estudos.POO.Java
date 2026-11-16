@@ -38,14 +38,6 @@ public class Animal {
         animais.add(this);
     }
 
-    public static void exibirAnimais(){
-        int numero = 1;
-        for(Animal a : Animal.getAnimais()){
-            System.out.println(String.format("%02d", numero) + "  " + a.getNome() + " ".repeat(14) + a.getEspecie() + "  " + a.getIdade() + "  " + a.getStatusAdocao());
-            numero++;
-        }
-    }
-
     public static List<Animal> getAnimais(){
         return animais;
     }
@@ -66,6 +58,18 @@ public class Animal {
         return especie;
     }
 
+    public String getDataResgate(){
+        return dataResgate;
+    }
+
+    public String getPorte(){
+        return porte;
+    }
+
+    public String getEstadoSaude(){
+        return estadoSaude;
+    }
+
     public String getSexo(){
         return sexo;
     }
@@ -82,8 +86,69 @@ public class Animal {
         return vetResponsavel;
     }
 
+    public int getId(){
+        return id;
+    }
+
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+
+    public void setEspecie(String especie){
+        this.especie = especie;
+    }
+
+    public void setRaca(String raca){ 
+        this.raca = raca;
+    }
+
+    public void setIdade(int idade){
+        this.idade = idade;
+    }
+
+    public void setPorte(String porte){
+        this.porte = porte;
+    }
+
+    public void setEstadoSaude(String estadoSaude){
+        this.estadoSaude = estadoSaude;
+    }
+
+    public void setDataResgate(String dataResgate){
+        this.dataResgate = dataResgate;
+    }
+
+    public void setStatusAdocao(String statusAdocao){
+        this.statusAdocao = statusAdocao;
+    }
+
+    public void setSexo(String sexo){
+        this.sexo = sexo;
+    }
+
+    public void setPeso(double peso){
+        this.peso = peso;
+    }
+
+    public static void exibirAnimais(){
+        for(Animal a : animais){
+            System.out.println(a.toString());
+        }
+        System.out.println("");
+    }
+
+    public static List<Animal> getAnimaisDisponiveisAdocao(){
+        List<Animal> animaisDisponiveisAdocao = new ArrayList<>();
+        for(Animal a : animais){
+            if(a.getStatusAdocao().toLowerCase().equals("disponivel")){
+                animaisDisponiveisAdocao.add(a);
+            }
+        }
+        return animaisDisponiveisAdocao;
+    }
+
     @Override
     public String toString(){
-        return id + " - " + nome + " (" + especie + ")";
+        return "ID: " + id + " - " + nome + " (" + especie + ")";
     }
 }

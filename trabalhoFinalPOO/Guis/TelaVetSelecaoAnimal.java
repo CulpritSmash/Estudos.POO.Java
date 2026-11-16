@@ -10,10 +10,10 @@ import ControleSaude.Vacinacao;
 import java.awt.*;
 import java.util.List;
 
-public class TelaSelecaoAnimal extends JFrame {
+public class TelaVetSelecaoAnimal extends JFrame {
     private Veterinario vet;
 
-    public TelaSelecaoAnimal(Veterinario vet, List<Animal> animais){
+    public TelaVetSelecaoAnimal(Veterinario vet, List<Animal> animais){
         setTitle("Selecionar Animal");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -39,7 +39,7 @@ public class TelaSelecaoAnimal extends JFrame {
                 JOptionPane.showMessageDialog(this, "Selecione um animal.");
                 return;
             }
-            new TelaConsulta(vet, lista.getSelectedValue()).setVisible(true);;
+            new TelaConsulta(vet, lista.getSelectedValue()).setVisible(true);
             dispose();
         });
         JButton btnVer = new JButton("Ver Consultas Anteriores");
@@ -78,21 +78,33 @@ public class TelaSelecaoAnimal extends JFrame {
             JOptionPane.showMessageDialog(this, new JScrollPane(listaVac), "Vacinações de " + escolhido.getNome(), JOptionPane.PLAIN_MESSAGE);
         });
 
+        JButton btnRelatorio = new JButton("Emitir relatório");
+        btnRelatorio.addActionListener(e -> {
+        Animal escolhido = lista.getSelectedValue();
+        if(escolhido == null){
+            JOptionPane.showMessageDialog(this, "Selecione um animal.");
+            return;
+        }
+        vet.emitirRelatorio(escolhido);
+        });
+
         JButton btnVoltar = new JButton("Voltar");
         btnVoltar.addActionListener(e -> {
             dispose();
             return;
         });
 
-        JPanel painelBotoes = new JPanel(new GridLayout(1, 3, 8, 8));
+        JPanel painelBotoes = new JPanel(new GridLayout(2, 3, 8, 8));
         painelBotoes.add(btnNova);
         painelBotoes.add(btnVer);
         painelBotoes.add(btnVacina);
         painelBotoes.add(btnVerVacinas);
+        painelBotoes.add(btnRelatorio);
         painelBotoes.add(btnVoltar);
 
         add(new JScrollPane(lista), BorderLayout.CENTER);
         add(painelBotoes, BorderLayout.SOUTH);
+        setVisible(true);
     }
 
     private void registrarVacinacao(Animal animal){
@@ -113,7 +125,13 @@ public class TelaSelecaoAnimal extends JFrame {
             JOptionPane.showMessageDialog(this, "Informe a vacina aplicada.", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        new Vacinacao(txtData.getText(), txtHorario.getText(), txtVacina.getText(), animal, vet);
+
+        if(Vacinacao.existeVacinacao(animal, txtData.getText().trim(), txtVacina.getText().trim())){
+            JOptionPane.showMessageDialog(this, "Essa vacinação já foi registrada nesta data", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        new Vacinacao(txtData.getText().trim(), txtHorario.getText().trim(), txtVacina.getText().trim(), animal, vet);
         JOptionPane.showMessageDialog(this, "Vacinação registrada!");
     }
 }

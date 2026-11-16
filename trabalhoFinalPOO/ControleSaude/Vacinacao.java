@@ -1,11 +1,12 @@
 package ControleSaude;
 import ParteAnimal.*;
 import Usuarios.Veterinario;
+import Interfaces.*;
 
 import java.util.List;
 import java.util.ArrayList;
 
-public class Vacinacao {
+public class Vacinacao implements Registravel{
     private static final List<Vacinacao> registroVacinacoes = new ArrayList<>();
 
     String data;
@@ -29,6 +30,32 @@ public class Vacinacao {
             if(v.vacinado == animal) resultado.add(v);
         }
         return resultado;
+    }
+
+    public static boolean existeVacinacao(Animal animal, String data, String vacina) {
+    for (Vacinacao v : registroVacinacoes) {
+        if (v.vacinado == animal
+                && v.data.equals(data)
+                && v.vacinaAplicada.equalsIgnoreCase(vacina)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+    @Override
+    public String getData(){
+        return data;
+    }
+
+    @Override
+    public String getHorario(){
+        return horario;
+    }
+
+    @Override 
+    public String resumo(){
+        return "Vacina" + vacinaAplicada;
     }
 
     @Override 

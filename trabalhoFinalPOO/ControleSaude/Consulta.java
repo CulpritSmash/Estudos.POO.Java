@@ -3,8 +3,9 @@ import java.util.List;
 import java.util.ArrayList;
 import ParteAnimal.*;
 import Usuarios.Veterinario;
+import Interfaces.*;
 
-public class Consulta {
+public class Consulta implements Registravel{
     private static final List<Consulta> registroConsultas = new ArrayList<>();
 
     private String data; // dd/mm/aa
@@ -66,14 +67,6 @@ public class Consulta {
         return tratamentos;
     }
 
-    public String getData(){
-        return data;
-    }
-
-    public String getHorario(){
-        return horario;
-    }
-
     public String getMotivo(){
         return motivo;
     }
@@ -96,6 +89,21 @@ public class Consulta {
 
     public Animal getAnimal(){
         return animal;
+    }
+
+    @Override 
+    public String getData(){
+        return data;
+    }
+
+    @Override 
+    public String getHorario(){
+        return horario;
+    }
+
+    @Override
+    public String resumo(){
+        return "Consulta: " + motivo + " - " + diagnostico + " - " + "Veterinário: " + profissionalResponsavel.getNome();
     }
 
     @Override 
