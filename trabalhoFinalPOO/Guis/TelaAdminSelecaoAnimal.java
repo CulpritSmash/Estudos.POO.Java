@@ -8,6 +8,7 @@ import ControleSaude.Consulta;
 import ControleSaude.Vacinacao;
 
 import java.awt.*;
+import java.lang.classfile.attribute.StackMapFrameInfo.VerificationTypeInfo;
 import java.util.List;
 
 public class TelaAdminSelecaoAnimal extends JFrame {
@@ -21,7 +22,9 @@ public class TelaAdminSelecaoAnimal extends JFrame {
         
         DefaultListModel<Animal> modelo = new DefaultListModel<>();
         for(Animal a : animais){
-            modelo.addElement(a);
+            if(a.isAtivo()){
+                modelo.addElement(a);
+            }
         }
 
         JList<Animal> lista = new JList<>(modelo);
@@ -30,16 +33,38 @@ public class TelaAdminSelecaoAnimal extends JFrame {
         JButton btnCadastrar = new JButton("Cadastrar Animal");
         btnCadastrar.addActionListener(e ->{
             new TelaCadastroAnimal();
+            dispose();
         });
 
         JButton btnEditar = new JButton("Editar registro");
         btnEditar.addActionListener(e -> {
-            
+            Animal escolhido = lista.getSelectedValue();
+            if(escolhido == null){
+                JOptionPane.showMessageDialog(this, "Selecione um animal na lista primeiro.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            new TelaCadastroAnimal(escolhido);
+            dispose();
         });
 
         JButton btnRemover = new JButton("Remover registro");
         btnRemover.addActionListener(e ->{
+            Animal escolhido = lista.getSelectedValue();
+            if(escolhido ==  null){
+                JOptionPane.showMessageDialog(this, "Selecione um animal para remover.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
 
+            if(escolhido.getStatusAdocao().equalsIgnoreCase("Adotado")){
+                JOptionPane.showMessageDialog(this, "Animais já adotados não podem ser removidos.", "Operação bloqueada", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int confirmacao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover " + escolhido.getNome() + " da lista ativa?", "Confirmar remoção", JOptionPane.YES_NO_OPTION);
+            if(confirmacao == JOptionPane.YES_OPTION){
+                escolhido.setAtivo(false);
+                modelo.removeElement(escolhido);
+            }
         });
 
         JButton btnVoltar = new JButton("Voltar");

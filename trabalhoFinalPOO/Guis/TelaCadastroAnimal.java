@@ -170,5 +170,6 @@ public class TelaCadastroAnimal extends JFrame {
         painelBotoes.add(btnAcao);
         painelBotoes.add(btnVoltar);
         add(painelBotoes, BorderLayout.SOUTH);
+        setVisible(true);
     }
 }

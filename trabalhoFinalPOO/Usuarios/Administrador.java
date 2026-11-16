@@ -26,6 +26,5 @@ public class Administrador extends Usuario{
         } else{
             new TelaAdminSelecaoAnimal(Animal.getAnimais());
         }
-
     }
 }

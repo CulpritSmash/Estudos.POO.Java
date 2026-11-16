@@ -19,6 +19,7 @@ public class Animal {
     private Veterinario vetResponsavel;
     private static int animaisTotais = 0;
     private int id;
+    private boolean ativo = true;
 
     private static List<Animal> animais = new ArrayList<>();
 
@@ -128,6 +129,14 @@ public class Animal {
 
     public void setPeso(double peso){
         this.peso = peso;
+    }
+
+    public boolean isAtivo(){
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo){
+        this.ativo = ativo;
     }
 
     public static void exibirAnimais(){
